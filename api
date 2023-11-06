@@ -1,0 +1,12 @@
+# add this configuration to nginx sites-available and make link to nginx sites-enabled
+server {
+        listen [::]:80; # add port in which website is gonna available
+        listen 80;
+
+        server_name _; # the name of the server or the name of the website domain
+
+        location / {
+                include proxy_params;
+                proxy_pass http://localhost:7000; # URL of the proxy or systemd service
+        }
+}

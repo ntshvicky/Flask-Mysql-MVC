@@ -1,0 +1,15 @@
+# add this service to the systemd service in /etc/systemd/system/ directory
+[Unit]
+Description=Gunicorn instance to serve API app
+After=network.target
+
+[Service]
+User=ubuntu # your system account (ubuntu for aws, azureuser for azure default account)
+Group=www-data
+WorkingDirectory=/home/ubuntu/Flask-SQLAlchemy-MVC
+Environment="PATH=/home/ubuntu/Flask-SQLAlchemy-MVC/env/bin"
+ExecStart=/home/ubuntu/Flask-SQLAlchemy-MVC/env/bin/python3 -m gunicorn -b localhost:7000 --timeout 600 -w 4 main:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

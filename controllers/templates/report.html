@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title>For PDF Report</title>
+        <meta charset="utf-8">
+
+  
+        <style>
+            /* write your css here. For pdf dont use .css or .js expernally */
+            .top-header {
+                width: 100%;
+                height: 120px; 
+                background-color: #78797a;
+            }
+        </style>
+    </head>
+    <body>
+
+        <table class="top-header">
+            <tr>
+                <td style="margin-top: 15px; margin-bottom: 15px;">
+                    <label>Logo</label>
+                </td>
+                <td style="margin-top: 15px; margin-bottom: 15px;padding-left: 60px;">
+                    <div>Header</div>
+                    <div style="font-size: 12px">(Example Data: {{data.print_date}})</div>
+                </td>
+            </tr>
+        </table>
+
+        <div style="padding-left: 10px; padding-right: 10px; padding-top: 20px; width:100%;">
+
+            <table class="data-table">
+                <tr>
+                    <th style="text-align: center;">Employee Code</th>
+                    <td>{{data.emp_code|title}}</td>
+                    <th style="text-align: center;">Employee Name</th>
+                    <td>{{data.name|title}}</td>
+                    <th style="text-align: center;">Designation</th>
+                    <td>{{data.designation | replace('_',' ')|title}}</td>
+                </tr>
+            </table>
+
+            <table class="data-table">
+                <tr>
+                    <th style="text-align: center;">Actions</th>
+                    <th style="text-align: center;">Log IP</th>
+                    <th style="text-align: center;">Platform</th>
+                </tr>
+                
+                <!-- Example for loop -->
+                {%for d in data.logs %}
+                <tr>
+                    <td style="padding: 2px;padding-bottom: 2px;">
+                        <!-- Example to show image from passed data -->
+                        {{d.action}}
+                    </td>
+                    <td style="padding: 2px;padding-bottom: 2px;">
+                        <span>{{d.ip_address}}</span>
+                    </td>
+                    <!-- Example if else in jinja -->
+                    <td style="padding: 2px; vertical-align: top;">
+                        {%if d.platform == "" %}
+                        Browser
+                        {%else%}
+                        {{d.platform}}
+                        {%endif%}
+                    </td>
+                </tr>
+                {%endfor %}
+            </table>
+        </div>
+    
+        
+    </body>
+
+</html>
