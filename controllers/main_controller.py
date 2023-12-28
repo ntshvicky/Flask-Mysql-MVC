@@ -47,6 +47,7 @@ app = OpenAPI(__name__, info=info,
               security_schemes=security_schemes, servers=servers, doc_ui=True)
 app.config["VALIDATE_RESPONSE"] = True
 app.config['SECRET_KEY'] = os.getenv('APP_SECRET_KEY')
+app.template_folder = '../templates'
 CORS(app)
 
 
